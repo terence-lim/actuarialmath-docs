@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>actuarialmath.policyvalues module &mdash; actuarialmath  documentation</title>
+  <title>policyvalues &mdash; actuarialmath  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -19,8 +19,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="actuarialmath.premiums module" href="actuarialmath.premiums.html" />
-    <link rel="prev" title="actuarialmath.mthly module" href="actuarialmath.mthly.html" /> 
+    <link rel="next" title="reserves" href="actuarialmath.reserves.html" />
+    <link rel="prev" title="premiums" href="actuarialmath.premiums.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -42,39 +42,56 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Submodules:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">actuarialmath</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="actuarialmath.html">actuarialmath package</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="actuarialmath.html#submodules">Submodules</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.actuarial.html">actuarialmath.actuarial module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.annuity.html">actuarialmath.annuity module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.constantforce.html">actuarialmath.constantforce module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.extrarisk.html">actuarialmath.extrarisk module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.fractional.html">actuarialmath.fractional module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.insurance.html">actuarialmath.insurance module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.interest.html">actuarialmath.interest module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.life.html">actuarialmath.life module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.lifetable.html">actuarialmath.lifetable module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.lifetime.html">actuarialmath.lifetime module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.mortalitylaws.html">actuarialmath.mortalitylaws module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.mthly.html">actuarialmath.mthly module</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">actuarialmath.policyvalues module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.premiums.html">actuarialmath.premiums module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.recursion.html">actuarialmath.recursion module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.reserves.html">actuarialmath.reserves module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.selectlife.html">actuarialmath.selectlife module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.sult.html">actuarialmath.sult module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.survival.html">actuarialmath.survival module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.udd.html">actuarialmath.udd module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.woolhouse.html">actuarialmath.woolhouse module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.actuarial.html">actuarial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.interest.html">interest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.life.html">life</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.survival.html">survival</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.lifetime.html">lifetime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.fractional.html">fractional</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.insurance.html">insurance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.annuity.html">annuity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.premiums.html">premiums</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">policyvalues</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#actuarialmath.policyvalues.PolicyValues"><code class="docutils literal notranslate"><span class="pre">PolicyValues</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.policyvalues.PolicyValues.net_future_loss"><code class="docutils literal notranslate"><span class="pre">PolicyValues.net_future_loss()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.policyvalues.PolicyValues.net_variance_loss"><code class="docutils literal notranslate"><span class="pre">PolicyValues.net_variance_loss()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.policyvalues.PolicyValues.net_policy_variance"><code class="docutils literal notranslate"><span class="pre">PolicyValues.net_policy_variance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.policyvalues.PolicyValues.net_policy_value"><code class="docutils literal notranslate"><span class="pre">PolicyValues.net_policy_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.policyvalues.PolicyValues.gross_future_loss"><code class="docutils literal notranslate"><span class="pre">PolicyValues.gross_future_loss()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.policyvalues.PolicyValues.gross_variance_loss"><code class="docutils literal notranslate"><span class="pre">PolicyValues.gross_variance_loss()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.policyvalues.PolicyValues.gross_policy_variance"><code class="docutils literal notranslate"><span class="pre">PolicyValues.gross_policy_variance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.policyvalues.PolicyValues.gross_policy_value"><code class="docutils literal notranslate"><span class="pre">PolicyValues.gross_policy_value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.policyvalues.PolicyValues.L_from_t"><code class="docutils literal notranslate"><span class="pre">PolicyValues.L_from_t()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.policyvalues.PolicyValues.L_to_t"><code class="docutils literal notranslate"><span class="pre">PolicyValues.L_to_t()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.policyvalues.PolicyValues.L_from_prob"><code class="docutils literal notranslate"><span class="pre">PolicyValues.L_from_prob()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.policyvalues.PolicyValues.L_to_prob"><code class="docutils literal notranslate"><span class="pre">PolicyValues.L_to_prob()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.policyvalues.PolicyValues.L_plot"><code class="docutils literal notranslate"><span class="pre">PolicyValues.L_plot()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="actuarialmath.html#module-actuarialmath">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#actuarialmath.policyvalues.Contract"><code class="docutils literal notranslate"><span class="pre">Contract</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.policyvalues.Contract.set_contract"><code class="docutils literal notranslate"><span class="pre">Contract.set_contract()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.policyvalues.Contract.premium_terms"><code class="docutils literal notranslate"><span class="pre">Contract.premium_terms</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.policyvalues.Contract.renewals"><code class="docutils literal notranslate"><span class="pre">Contract.renewals()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.policyvalues.Contract.renewal_profit"><code class="docutils literal notranslate"><span class="pre">Contract.renewal_profit</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.policyvalues.Contract.initial_cost"><code class="docutils literal notranslate"><span class="pre">Contract.initial_cost</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.policyvalues.Contract.claims_cost"><code class="docutils literal notranslate"><span class="pre">Contract.claims_cost</span></code></a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.reserves.html">reserves</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.lifetable.html">lifetable</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.sult.html">sult</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.selectlife.html">selectlife</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.recursion.html">recursion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.mortalitylaws.html">mortalitylaws</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.constantforce.html">constantforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.extrarisk.html">extrarisk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.mthly.html">mthly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.udd.html">udd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.woolhouse.html">woolhouse</a></li>
 </ul>
 
         </div>
@@ -91,9 +108,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="modules.html">actuarialmath</a></li>
-          <li class="breadcrumb-item"><a href="actuarialmath.html">actuarialmath package</a></li>
-      <li class="breadcrumb-item active">actuarialmath.policyvalues module</li>
+      <li class="breadcrumb-item active">policyvalues</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/actuarialmath.policyvalues.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -104,7 +119,7 @@
            <div itemprop="articleBody">
              
   <section id="module-actuarialmath.policyvalues">
-<span id="actuarialmath-policyvalues-module"></span><h1>actuarialmath.policyvalues module<a class="headerlink" href="#module-actuarialmath.policyvalues" title="Permalink to this heading"></a></h1>
+<span id="policyvalues"></span><h1>policyvalues<a class="headerlink" href="#module-actuarialmath.policyvalues" title="Permalink to this heading"></a></h1>
 <p>Policy Values - Computes present value of future losses and reserves</p>
 <p>MIT License. Copyright 2022-2023 Terence Lim</p>
 <dl class="py class">
@@ -400,8 +415,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="actuarialmath.mthly.html" class="btn btn-neutral float-left" title="actuarialmath.mthly module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="actuarialmath.premiums.html" class="btn btn-neutral float-right" title="actuarialmath.premiums module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="actuarialmath.premiums.html" class="btn btn-neutral float-left" title="premiums" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="actuarialmath.reserves.html" class="btn btn-neutral float-right" title="reserves" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

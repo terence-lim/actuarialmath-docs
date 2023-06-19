@@ -39,9 +39,29 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Submodules:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">actuarialmath</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.actuarial.html">actuarial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.interest.html">interest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.life.html">life</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.survival.html">survival</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.lifetime.html">lifetime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.fractional.html">fractional</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.insurance.html">insurance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.annuity.html">annuity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.premiums.html">premiums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.policyvalues.html">policyvalues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.reserves.html">reserves</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.lifetable.html">lifetable</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.sult.html">sult</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.selectlife.html">selectlife</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.recursion.html">recursion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.mortalitylaws.html">mortalitylaws</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.constantforce.html">constantforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.extrarisk.html">extrarisk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.mthly.html">mthly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.udd.html">udd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.woolhouse.html">woolhouse</a></li>
 </ul>
 
         </div>
@@ -77,12 +97,12 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Callable</span>
-<span class="kn">from</span> <span class="nn">actuarialmath.lifetable</span> <span class="kn">import</span> <span class="n">LifeTable</span>
+<span class="kn">from</span> <span class="nn">actuarialmath</span> <span class="kn">import</span> <span class="n">LifeTable</span>
 
-<div class="viewcode-block" id="faml_survival"><a class="viewcode-back" href="../../actuarialmath.sult.html#actuarialmath.sult.faml_survival">[docs]</a><span class="k">def</span> <span class="nf">faml_survival</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">,</span> <span class="n">A</span> <span class="o">=</span> <span class="mf">0.00022</span><span class="p">,</span> <span class="n">B</span> <span class="o">=</span> <span class="mf">0.0000027</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mf">1.124</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;SULT default survival function from SOA&#39;s `Excel Workbook for FAM-L Tables`&quot;&quot;&quot;</span>
-    <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mf">0.00022</span><span class="p">,</span> <span class="mf">0.0000027</span><span class="p">,</span> <span class="mf">1.124</span>
-    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">A</span><span class="o">*</span><span class="n">t</span> <span class="o">-</span> <span class="p">(</span><span class="n">B</span><span class="o">*</span><span class="n">c</span><span class="o">**</span><span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="n">c</span><span class="o">**</span><span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span><span class="o">/</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">c</span><span class="p">))</span></div>
+<span class="c1"># Makeham&#39;s Law parameters from SOA’s Excel Workbook for FAM-L Tables</span>
+<span class="n">_A</span><span class="p">,</span> <span class="n">_B</span><span class="p">,</span> <span class="n">_c</span> <span class="o">=</span> <span class="mf">0.00022</span><span class="p">,</span> <span class="mf">0.0000027</span><span class="p">,</span> <span class="mf">1.124</span>
+<span class="k">def</span> <span class="nf">_faml_sult</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">_A</span><span class="o">*</span><span class="n">t</span> <span class="o">-</span> <span class="p">(</span><span class="n">_B</span><span class="o">*</span><span class="n">_c</span><span class="o">**</span><span class="n">x</span><span class="o">*</span><span class="p">(</span><span class="n">_c</span><span class="o">**</span><span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">_c</span><span class="p">))</span>
 
 <div class="viewcode-block" id="SULT"><a class="viewcode-back" href="../../actuarialmath.sult.html#actuarialmath.sult.SULT">[docs]</a><span class="k">class</span> <span class="nc">SULT</span><span class="p">(</span><span class="n">LifeTable</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generates and uses a standard ultimate life table</span>
@@ -94,9 +114,10 @@
 <span class="sd">      maxage : maximum age</span>
 <span class="sd">      S : survival function, default is Makeham with SOA FAM-L parameters</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    
+
+
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span> <span class="n">radix</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100000</span><span class="p">,</span> 
-                 <span class="n">S</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">faml_survival</span><span class="p">,</span>
+                 <span class="n">S</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="n">_faml_sult</span><span class="p">,</span>
                  <span class="n">minage</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">maxage</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">130</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct SULT&quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>

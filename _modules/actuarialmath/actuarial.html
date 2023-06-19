@@ -39,9 +39,29 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Submodules:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../modules.html">actuarialmath</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.actuarial.html">actuarial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.interest.html">interest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.life.html">life</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.survival.html">survival</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.lifetime.html">lifetime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.fractional.html">fractional</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.insurance.html">insurance</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.annuity.html">annuity</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.premiums.html">premiums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.policyvalues.html">policyvalues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.reserves.html">reserves</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.lifetable.html">lifetable</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.sult.html">sult</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.selectlife.html">selectlife</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.recursion.html">recursion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.mortalitylaws.html">mortalitylaws</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.constantforce.html">constantforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.extrarisk.html">extrarisk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.mthly.html">mthly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.udd.html">udd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../actuarialmath.woolhouse.html">woolhouse</a></li>
 </ul>
 
         </div>
@@ -69,14 +89,17 @@
            <div itemprop="articleBody">
              
   <h1>Source code for actuarialmath.actuarial</h1><div class="highlight"><pre>
-<span></span><span class="sd">&quot;&quot;&quot;Base class for actuarial math, with common utility functions and constants</span>
+<span></span><span class="sd">&quot;&quot;&quot;Define base class for actuarial math, with utility helpers and constants</span>
 
 <span class="sd">MIT License. Copyright (c) 2022-2023 Terence Lim</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">math</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">scipy</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">List</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;ggplot&#39;</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Actuarial"><a class="viewcode-back" href="../../actuarialmath.actuarial.html#actuarialmath.actuarial.Actuarial">[docs]</a><span class="k">class</span> <span class="nc">Actuarial</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Define constants and common utility functions</span>
@@ -95,28 +118,6 @@
     <span class="n">_verbose</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">_MAXAGE</span> <span class="o">=</span> <span class="mi">130</span>    <span class="c1"># default oldest age</span>
     <span class="n">_MINAGE</span> <span class="o">=</span> <span class="mi">0</span>      <span class="c1"># default youngest age</span>
-
-<div class="viewcode-block" id="Actuarial.methods"><a class="viewcode-back" href="../../actuarialmath.actuarial.html#actuarialmath.actuarial.Actuarial.methods">[docs]</a>    <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">methods</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">echo</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Helper to partially display docstrings from classes and methods</span>
-
-<span class="sd">        Args:</span>
-<span class="sd">          echo : print if True, else return as text string</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">class &quot;</span> <span class="o">+</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__name__</span> <span class="o">+</span> <span class="s2">&quot; - &quot;</span>
-        <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">l</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="vm">__doc__</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)])</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="s1">&#39;_methods&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_methods</span><span class="p">:</span>
-            <span class="n">s</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">    Methods:</span><span class="se">\n</span><span class="s1">    --------</span><span class="se">\n\n</span><span class="s1">&#39;</span>
-            <span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">_methods</span><span class="p">:</span>
-                <span class="n">meth</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">method</span><span class="p">)</span>
-                <span class="n">desc</span> <span class="o">=</span> <span class="n">meth</span><span class="o">.</span><span class="vm">__doc__</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-                <span class="k">if</span> <span class="nb">callable</span><span class="p">(</span><span class="n">meth</span><span class="p">):</span>
-                    <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">signature</span><span class="p">(</span><span class="n">meth</span><span class="p">)</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
-                            <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;cls&#39;</span><span class="p">,</span> <span class="s1">&#39;self&#39;</span><span class="p">]]</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">args</span> <span class="o">=</span> <span class="p">[]</span>
-                <span class="n">s</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;    </span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">(&quot;</span> <span class="o">+</span> <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;):</span><span class="se">\n</span><span class="si">{</span><span class="s1">&#39; &#39;</span><span class="o">*</span><span class="mi">6</span><span class="si">}{</span><span class="n">desc</span><span class="si">}</span><span class="se">\n\n</span><span class="s2">&quot;</span>
-        <span class="k">return</span> <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">if</span> <span class="n">echo</span> <span class="k">else</span> <span class="n">s</span></div>
 
     <span class="c1">#</span>
     <span class="c1"># Helpers for numerical computations</span>
@@ -148,13 +149,13 @@
 <div class="viewcode-block" id="Actuarial.solve"><a class="viewcode-back" href="../../actuarialmath.actuarial.html#actuarialmath.actuarial.Actuarial.solve">[docs]</a>    <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">solve</span><span class="p">(</span><span class="n">fun</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">],</span> <span class="n">target</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> 
               <span class="n">grid</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="n">Tuple</span> <span class="o">|</span> <span class="n">List</span><span class="p">,</span> <span class="n">mad</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Solve for the root of, or parameter value that minimizes, an equation</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Solve for the root of, or parameter value that minimizes, a function</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">          fun : function to compute output given input values</span>
 <span class="sd">          target : target value of function output</span>
-<span class="sd">          grid : initial guesses or bounds</span>
-<span class="sd">          root : whether solve root, or minimize absolute difference (False)</span>
+<span class="sd">          grid : initial range of guesses</span>
+<span class="sd">          root : whether solve root (True), or minimize absolute deviation (False)</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">          value s.t. output of function fun(value) ~ target</span>
@@ -168,7 +169,7 @@
                 <span class="n">grid</span> <span class="o">=</span> <span class="nb">min</span><span class="p">([(</span><span class="nb">abs</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">x</span><span class="p">)</span>    <span class="c1"># guess can be list of guesses</span>
                             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">grid</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">grid</span><span class="p">),</span> <span class="mi">5</span><span class="p">)])[</span><span class="mi">1</span><span class="p">]</span>
             <span class="n">output</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">fsolve</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">[</span><span class="n">grid</span><span class="p">],</span> <span class="n">full_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-            <span class="n">fun</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># execute with final answer in case want side effects</span>
+            <span class="n">fun</span><span class="p">(</span><span class="n">output</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>   <span class="c1"># call again with final in case want side effect</span>
             <span class="k">return</span> <span class="n">output</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span></div>
 
 <div class="viewcode-block" id="Actuarial.add_term"><a class="viewcode-back" href="../../actuarialmath.actuarial.html#actuarialmath.actuarial.Actuarial.add_term">[docs]</a>    <span class="k">def</span> <span class="nf">add_term</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
@@ -183,7 +184,7 @@
         <span class="k">return</span> <span class="n">t</span> <span class="o">+</span> <span class="n">n</span></div>
 
 <div class="viewcode-block" id="Actuarial.max_term"><a class="viewcode-back" href="../../actuarialmath.actuarial.html#actuarialmath.actuarial.Actuarial.max_term">[docs]</a>    <span class="k">def</span> <span class="nf">max_term</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">u</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adjust term if adding term and deferral periods to (x) exceeds maxage</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Decrease term t if adding deferral period u to (x) exceeds maxage</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">          x : age</span>
@@ -191,7 +192,7 @@
 <span class="sd">          u : term deferred</span>
 
 <span class="sd">        Returns:</span>
-<span class="sd">          value of term t adjusted by deferral and maxage s.t. does not exceed maxage</span>
+<span class="sd">          value of term t adjusted by deferral and maxage s.t. maxage not exceeded</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">x</span> <span class="o">+</span> <span class="n">t</span> <span class="o">+</span> <span class="n">u</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_MAXAGE</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_MAXAGE</span> <span class="o">-</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">u</span><span class="p">)</span>

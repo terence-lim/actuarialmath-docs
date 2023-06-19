@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>actuarialmath.annuity module &mdash; actuarialmath  documentation</title>
+  <title>annuity &mdash; actuarialmath  documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!--[if lt IE 9]>
@@ -19,8 +19,8 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="actuarialmath.constantforce module" href="actuarialmath.constantforce.html" />
-    <link rel="prev" title="actuarialmath.actuarial module" href="actuarialmath.actuarial.html" /> 
+    <link rel="next" title="premiums" href="actuarialmath.premiums.html" />
+    <link rel="prev" title="insurance" href="actuarialmath.insurance.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -42,39 +42,52 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Submodules:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="reference internal" href="modules.html">actuarialmath</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="actuarialmath.html">actuarialmath package</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="actuarialmath.html#submodules">Submodules</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.actuarial.html">actuarialmath.actuarial module</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">actuarialmath.annuity module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.constantforce.html">actuarialmath.constantforce module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.extrarisk.html">actuarialmath.extrarisk module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.fractional.html">actuarialmath.fractional module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.insurance.html">actuarialmath.insurance module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.interest.html">actuarialmath.interest module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.life.html">actuarialmath.life module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.lifetable.html">actuarialmath.lifetable module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.lifetime.html">actuarialmath.lifetime module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.mortalitylaws.html">actuarialmath.mortalitylaws module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.mthly.html">actuarialmath.mthly module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.policyvalues.html">actuarialmath.policyvalues module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.premiums.html">actuarialmath.premiums module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.recursion.html">actuarialmath.recursion module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.reserves.html">actuarialmath.reserves module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.selectlife.html">actuarialmath.selectlife module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.sult.html">actuarialmath.sult module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.survival.html">actuarialmath.survival module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.udd.html">actuarialmath.udd module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="actuarialmath.woolhouse.html">actuarialmath.woolhouse module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.actuarial.html">actuarial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.interest.html">interest</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.life.html">life</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.survival.html">survival</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.lifetime.html">lifetime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.fractional.html">fractional</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.insurance.html">insurance</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">annuity</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#actuarialmath.annuity.Annuity"><code class="docutils literal notranslate"><span class="pre">Annuity</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.annuity.Annuity.a_x"><code class="docutils literal notranslate"><span class="pre">Annuity.a_x()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.annuity.Annuity.immediate_annuity"><code class="docutils literal notranslate"><span class="pre">Annuity.immediate_annuity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.annuity.Annuity.annuity_twin"><code class="docutils literal notranslate"><span class="pre">Annuity.annuity_twin()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.annuity.Annuity.insurance_twin"><code class="docutils literal notranslate"><span class="pre">Annuity.insurance_twin()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.annuity.Annuity.annuity_variance"><code class="docutils literal notranslate"><span class="pre">Annuity.annuity_variance()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.annuity.Annuity.whole_life_annuity"><code class="docutils literal notranslate"><span class="pre">Annuity.whole_life_annuity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.annuity.Annuity.temporary_annuity"><code class="docutils literal notranslate"><span class="pre">Annuity.temporary_annuity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.annuity.Annuity.deferred_annuity"><code class="docutils literal notranslate"><span class="pre">Annuity.deferred_annuity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.annuity.Annuity.certain_life_annuity"><code class="docutils literal notranslate"><span class="pre">Annuity.certain_life_annuity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.annuity.Annuity.increasing_annuity"><code class="docutils literal notranslate"><span class="pre">Annuity.increasing_annuity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.annuity.Annuity.decreasing_annuity"><code class="docutils literal notranslate"><span class="pre">Annuity.decreasing_annuity()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.annuity.Annuity.Y_t"><code class="docutils literal notranslate"><span class="pre">Annuity.Y_t()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.annuity.Annuity.Y_from_t"><code class="docutils literal notranslate"><span class="pre">Annuity.Y_from_t()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.annuity.Annuity.Y_to_t"><code class="docutils literal notranslate"><span class="pre">Annuity.Y_to_t()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.annuity.Annuity.Y_from_prob"><code class="docutils literal notranslate"><span class="pre">Annuity.Y_from_prob()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.annuity.Annuity.Y_to_prob"><code class="docutils literal notranslate"><span class="pre">Annuity.Y_to_prob()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.annuity.Annuity.Y_x"><code class="docutils literal notranslate"><span class="pre">Annuity.Y_x()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.annuity.Annuity.Y_plot"><code class="docutils literal notranslate"><span class="pre">Annuity.Y_plot()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="actuarialmath.html#module-actuarialmath">Module contents</a></li>
 </ul>
 </li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.premiums.html">premiums</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.policyvalues.html">policyvalues</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.reserves.html">reserves</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.lifetable.html">lifetable</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.sult.html">sult</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.selectlife.html">selectlife</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.recursion.html">recursion</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.mortalitylaws.html">mortalitylaws</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.constantforce.html">constantforce</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.extrarisk.html">extrarisk</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.mthly.html">mthly</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.udd.html">udd</a></li>
+<li class="toctree-l1"><a class="reference internal" href="actuarialmath.woolhouse.html">woolhouse</a></li>
 </ul>
 
         </div>
@@ -91,9 +104,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
-          <li class="breadcrumb-item"><a href="modules.html">actuarialmath</a></li>
-          <li class="breadcrumb-item"><a href="actuarialmath.html">actuarialmath package</a></li>
-      <li class="breadcrumb-item active">actuarialmath.annuity module</li>
+      <li class="breadcrumb-item active">annuity</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/actuarialmath.annuity.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -104,7 +115,7 @@
            <div itemprop="articleBody">
              
   <section id="module-actuarialmath.annuity">
-<span id="actuarialmath-annuity-module"></span><h1>actuarialmath.annuity module<a class="headerlink" href="#module-actuarialmath.annuity" title="Permalink to this heading"></a></h1>
+<span id="annuity"></span><h1>annuity<a class="headerlink" href="#module-actuarialmath.annuity" title="Permalink to this heading"></a></h1>
 <p>Life annuities - Computes present values of annuity benefits</p>
 <p>MIT License. Copyright (c) 2022-2023 Terence Lim</p>
 <dl class="py class">
@@ -155,7 +166,7 @@
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>A</strong> – cost of insurance</p></li>
-<li><p><strong>discrete</strong> – discrete/annuity due (True) or continous (False)</p></li>
+<li><p><strong>discrete</strong> – discrete/annuity due (True) or continuous (False)</p></li>
 </ul>
 </dd>
 </dl>
@@ -169,7 +180,7 @@
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>a</strong> – cost of annuity</p></li>
-<li><p><strong>discrete</strong> – discrete/annuity due (True) or continous (False)</p></li>
+<li><p><strong>discrete</strong> – discrete/annuity due (True) or continuous (False)</p></li>
 </ul>
 </dd>
 </dl>
@@ -185,7 +196,7 @@
 <li><p><strong>A2</strong> – second moment of insurance factor</p></li>
 <li><p><strong>A1</strong> – first moment of insurance factor</p></li>
 <li><p><strong>b</strong> – annuity benefit amount</p></li>
-<li><p><strong>discrete</strong> – discrete/annuity due (True) or continous (False)</p></li>
+<li><p><strong>discrete</strong> – discrete/annuity due (True) or continuous (False)</p></li>
 </ul>
 </dd>
 </dl>
@@ -409,8 +420,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="actuarialmath.actuarial.html" class="btn btn-neutral float-left" title="actuarialmath.actuarial module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="actuarialmath.constantforce.html" class="btn btn-neutral float-right" title="actuarialmath.constantforce module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="actuarialmath.insurance.html" class="btn btn-neutral float-left" title="insurance" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="actuarialmath.premiums.html" class="btn btn-neutral float-right" title="premiums" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
