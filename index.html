@@ -139,7 +139,7 @@
 <section id="examples">
 <h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># SOA FAM-L sample question 5.7</span>
-<span class="kn">from</span> <span class="nn">actuarialmath.recursion</span> <span class="kn">import</span> <span class="n">Recursion</span><span class="p">,</span> <span class="n">Woolhouse</span>
+<span class="kn">from</span> <span class="nn">actuarialmath</span> <span class="kn">import</span> <span class="n">Recursion</span><span class="p">,</span> <span class="n">Woolhouse</span>
 <span class="c1"># initialize Recursion class with actuarial inputs</span>
 <span class="n">life</span> <span class="o">=</span> <span class="n">Recursion</span><span class="p">()</span><span class="o">.</span><span class="n">set_interest</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mf">0.04</span><span class="p">)</span>\
                   <span class="o">.</span><span class="n">set_A</span><span class="p">(</span><span class="mf">0.188</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">35</span><span class="p">)</span>\
@@ -152,7 +152,7 @@
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># SOA FAM-L sample question 7.20</span>
-<span class="kn">from</span> <span class="nn">actuarialmath.sult</span> <span class="kn">import</span> <span class="n">SULT</span><span class="p">,</span> <span class="n">Contract</span>
+<span class="kn">from</span> <span class="nn">actuarialmath</span> <span class="kn">import</span> <span class="n">SULT</span><span class="p">,</span> <span class="n">Contract</span>
 <span class="n">life</span> <span class="o">=</span> <span class="n">SULT</span><span class="p">()</span>
 <span class="c1"># compute the required FPT policy value</span>
 <span class="n">S</span> <span class="o">=</span> <span class="n">life</span><span class="o">.</span><span class="n">FPT_policy_value</span><span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>  <span class="c1"># is always 0 in year 1!</span>
@@ -174,8 +174,8 @@
 <h2>Resources<a class="headerlink" href="#resources" title="Permalink to this heading"></a></h2>
 <ol class="arabic simple">
 <li><p><a class="reference external" href="https://colab.research.google.com/drive/1TcNr1x5HbT2fF3iFMYGXdN_cvRKiSua4?usp=sharing">Colab</a> or <a class="reference external" href="https://terence-lim.github.io/notes/faml.ipynb">Jupyter notebook</a>, to solve all sample SOA FAM-L exam questions</p></li>
-<li><p><a class="reference external" href="https://terence-lim.github.io/actuarialmath-guide/">User Guide</a>, or <a class="reference external" href="https://terence-lim.github.io/notes/actuarialmath-guide.pdf">download pdf</a></p></li>
-<li><p><a class="reference external" href="https://actuarialmath.readthedocs.io/en/latest/">Code documentation</a></p></li>
+<li><p><a class="reference external" href="https://terence-lim.github.io/actuarialmath-guide/">Online User Guide</a>, or <a class="reference external" href="https://terence-lim.github.io/notes/actuarialmath-guide.pdf">download pdf</a></p></li>
+<li><p><a class="reference external" href="https://actuarialmath.readthedocs.io/en/latest/">API reference</a></p></li>
 <li><p><a class="reference external" href="https://github.com/terence-lim/actuarialmath.git">Github repo</a> and <a class="reference external" href="https://github.com/terence-lim/actuarialmath/issues">issues</a></p></li>
 </ol>
 <div class="toctree-wrapper compound">
