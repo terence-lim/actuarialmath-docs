@@ -127,59 +127,45 @@
 </ul>
 </dd>
 </dl>
-<dl class="py attribute">
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">interest</span> <span class="o">=</span> <span class="n">Interest</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">L</span> <span class="o">=</span> <span class="mi">35</span> <span class="o">*</span> <span class="n">interest</span><span class="o">.</span><span class="n">annuity</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">due</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">+</span> <span class="mi">75</span> <span class="o">*</span> <span class="n">interest</span><span class="o">.</span><span class="n">v_t</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">interest</span> <span class="o">=</span> <span class="n">Interest</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">R</span> <span class="o">=</span> <span class="mi">15</span> <span class="o">*</span> <span class="n">interest</span><span class="o">.</span><span class="n">annuity</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">due</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">+</span> <span class="mi">25</span> <span class="o">*</span> <span class="n">interest</span><span class="o">.</span><span class="n">v_t</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i2</span> <span class="o">=</span> <span class="n">Interest</span><span class="o">.</span><span class="n">double_force</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>  <span class="c1"># Double the force of interest</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d2</span> <span class="o">=</span> <span class="n">Interest</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="n">i2</span><span class="p">)</span><span class="o">.</span><span class="n">d</span>               <span class="c1"># Convert interest to discount rate</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="n">Interest</span><span class="o">.</span><span class="n">mthly</span><span class="p">(</span><span class="n">i_m</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>  <span class="c1"># Convert mthly to annual-pay</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">i_m</span> <span class="o">=</span> <span class="n">Interest</span><span class="o">.</span><span class="n">mthly</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">m</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>     <span class="c1"># Convert annual-pay to mthly</span>
+</pre></div>
+</div>
+<dl class="py property">
 <dt class="sig sig-object py" id="actuarialmath.interest.Interest.i">
-<span class="sig-name descname"><span class="pre">i</span></span><a class="headerlink" href="#actuarialmath.interest.Interest.i" title="Permalink to this definition"></a></dt>
-<dd><p>interest rate</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">i</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#actuarialmath.interest.Interest.i" title="Permalink to this definition"></a></dt>
+<dd><p>effective annual interest rate</p>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="py property">
 <dt class="sig sig-object py" id="actuarialmath.interest.Interest.d">
-<span class="sig-name descname"><span class="pre">d</span></span><a class="headerlink" href="#actuarialmath.interest.Interest.d" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">d</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#actuarialmath.interest.Interest.d" title="Permalink to this definition"></a></dt>
 <dd><p>discount rate</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="py property">
 <dt class="sig sig-object py" id="actuarialmath.interest.Interest.delta">
-<span class="sig-name descname"><span class="pre">delta</span></span><a class="headerlink" href="#actuarialmath.interest.Interest.delta" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">delta</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#actuarialmath.interest.Interest.delta" title="Permalink to this definition"></a></dt>
 <dd><p>continuously compounded interest rate</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="py property">
 <dt class="sig sig-object py" id="actuarialmath.interest.Interest.v">
-<span class="sig-name descname"><span class="pre">v</span></span><a class="headerlink" href="#actuarialmath.interest.Interest.v" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">v</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#actuarialmath.interest.Interest.v" title="Permalink to this definition"></a></dt>
 <dd><p>discount factor</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
 </dd></dl>
 
-<dl class="py attribute">
+<dl class="py property">
 <dt class="sig sig-object py" id="actuarialmath.interest.Interest.v_t">
-<span class="sig-name descname"><span class="pre">v_t</span></span><a class="headerlink" href="#actuarialmath.interest.Interest.v_t" title="Permalink to this definition"></a></dt>
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">v_t</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Callable</span></em><a class="headerlink" href="#actuarialmath.interest.Interest.v_t" title="Permalink to this definition"></a></dt>
 <dd><p>discount factor as a function of time</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Callable</p>
-</dd>
-</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -195,6 +181,10 @@
 </ul>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">interest</span><span class="o">.</span><span class="n">annuity</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">due</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="mf">2.831059</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">

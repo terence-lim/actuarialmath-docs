@@ -115,6 +115,17 @@
 <span class="sd">      discrete : annuity due (True) or continuous (False)</span>
 <span class="sd">      T : term of insurance</span>
 <span class="sd">      discrete : annuity due (True) or continuous (False)        </span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">      &gt;&gt;&gt; life = PolicyValues().set_interest(i=0.06)</span>
+<span class="sd">      &gt;&gt;&gt; a = 12</span>
+<span class="sd">      &gt;&gt;&gt; A = life.insurance_twin(a)</span>
+<span class="sd">      &gt;&gt;&gt; contract = Contract(benefit=1000, settlement_policy=20, </span>
+<span class="sd">      &gt;&gt;&gt;                     initial_policy=10, initial_premium=0.75, </span>
+<span class="sd">      &gt;&gt;&gt;                     renewal_policy=2, renewal_premium=0.1)</span>
+<span class="sd">      &gt;&gt;&gt; contract.premium = life.gross_premium(A=A, a=a, **contract.premium_terms)</span>
+<span class="sd">      &gt;&gt;&gt; print(A, contract.premium)</span>
+<span class="sd">      &gt;&gt;&gt; L = life.gross_variance_loss(A1=A, A2=0.14, contract=contract)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> 
@@ -195,7 +206,15 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">benefit</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">settlement_policy</span></div>
 
 <div class="viewcode-block" id="PolicyValues"><a class="viewcode-back" href="../../actuarialmath.policyvalues.html#actuarialmath.policyvalues.PolicyValues">[docs]</a><span class="k">class</span> <span class="nc">PolicyValues</span><span class="p">(</span><span class="n">Premiums</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute net and gross future losses and policy values&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute net and gross future losses and policy values</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">      &gt;&gt;&gt; life = PolicyValues().set_interest(i=0.04)</span>
+<span class="sd">      &gt;&gt;&gt; contract = Contract(premium=2.338, benefit=100, initial_premium=.1, </span>
+<span class="sd">      &gt;&gt;&gt;                     renewal_premium=0.05)</span>
+<span class="sd">      &gt;&gt;&gt; var = life.gross_variance_loss(A1=life.insurance_twin(16.50),</span>
+<span class="sd">      &gt;&gt;&gt;                                A2=0.17, contract=contract)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -535,8 +554,7 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SOA Question 6.30:  (A) 900&quot;</span><span class="p">)</span>
     <span class="n">life</span> <span class="o">=</span> <span class="n">PolicyValues</span><span class="p">()</span><span class="o">.</span><span class="n">set_interest</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mf">0.04</span><span class="p">)</span>
-    <span class="n">contract</span> <span class="o">=</span> <span class="n">Contract</span><span class="p">(</span><span class="n">premium</span><span class="o">=</span><span class="mf">2.338</span><span class="p">,</span> <span class="n">benefit</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">initial_premium</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span>
-                        <span class="n">renewal_premium</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+    <span class="n">contract</span> <span class="o">=</span> <span class="n">Contract</span><span class="p">(</span><span class="n">premium</span><span class="o">=</span><span class="mf">2.338</span><span class="p">,</span> <span class="n">benefit</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">initial_premium</span><span class="o">=</span><span class="mf">.1</span><span class="p">,</span> <span class="n">renewal_premium</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
     <span class="n">var</span> <span class="o">=</span> <span class="n">life</span><span class="o">.</span><span class="n">gross_variance_loss</span><span class="p">(</span><span class="n">A1</span><span class="o">=</span><span class="n">life</span><span class="o">.</span><span class="n">insurance_twin</span><span class="p">(</span><span class="mf">16.50</span><span class="p">),</span>
                                    <span class="n">A2</span><span class="o">=</span><span class="mf">0.17</span><span class="p">,</span> <span class="n">contract</span><span class="o">=</span><span class="n">contract</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>

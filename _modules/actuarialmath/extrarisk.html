@@ -105,6 +105,11 @@
 <span class="sd">      life : original survival and mortality rates</span>
 <span class="sd">      extra : amount of extra risk to adjust</span>
 <span class="sd">      risk : adjust by {&quot;ADD_FORCE&quot; &quot;MULTIPLY_FORCE&quot; &quot;ADD_AGE&quot; &quot;MULTIPLY_RATE&quot;}</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">      &gt;&gt;&gt; life = SULT()</span>
+<span class="sd">      &gt;&gt;&gt; extra = ExtraRisk(life=life, extra=2, risk=&quot;MULTIPLY_FORCE&quot;)</span>
+<span class="sd">      &gt;&gt;&gt; print(life.p_x(45), extra.p_x(45))</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">risks</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ADD_FORCE&quot;</span><span class="p">,</span> <span class="s2">&quot;MULTIPLY_FORCE&quot;</span><span class="p">,</span> <span class="s2">&quot;ADD_AGE&quot;</span><span class="p">,</span> <span class="s2">&quot;MULTIPLY_RATE&quot;</span><span class="p">]</span>
 
@@ -125,6 +130,11 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">          dict of age and survival function values adjusted by extract risk</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">          &gt;&gt;&gt; life = SULT()</span>
+<span class="sd">          &gt;&gt;&gt; extra = ExtraRisk(life=life, extra=0.05, risk=&quot;ADD_FORCE&quot;)</span>
+<span class="sd">          &gt;&gt;&gt; select = SelectLife(periods=1).set_select(s=0, age_selected=True, q=extra[&#39;q&#39;])</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">f</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;q&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">q_x</span><span class="p">,</span> <span class="s1">&#39;p&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">p_x</span><span class="p">}[</span><span class="n">col</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
         <span class="k">return</span> <span class="p">{</span><span class="n">x</span><span class="p">:</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">life</span><span class="o">.</span><span class="n">_MINAGE</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">life</span><span class="o">.</span><span class="n">_MAXAGE</span><span class="o">+</span><span class="mi">1</span><span class="p">)}</span></div>

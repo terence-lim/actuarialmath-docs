@@ -123,10 +123,36 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">actuarialmath.annuity.</span></span><span class="sig-name descname"><span class="pre">Annuity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">udd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/actuarialmath/annuity.html#Annuity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#actuarialmath.annuity.Annuity" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="actuarialmath.insurance.html#actuarialmath.insurance.Insurance" title="actuarialmath.insurance.Insurance"><code class="xref py py-class docutils literal notranslate"><span class="pre">Insurance</span></code></a></p>
 <p>Compute present values and relationships of life annuities</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">life</span> <span class="o">=</span> <span class="n">Annuity</span><span class="p">()</span><span class="o">.</span><span class="n">set_interest</span><span class="p">(</span><span class="n">delta</span><span class="o">=</span><span class="mf">0.06</span><span class="p">)</span><span class="o">.</span><span class="n">set_survival</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="k">lambda</span> <span class="o">*</span><span class="n">x</span><span class="p">:</span> <span class="mf">0.04</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">a_x</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">immediate_annuity</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">annuity_twin</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="mf">0.05879</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">insurance_twin</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mf">19.7655</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">annuity_variance</span><span class="p">(</span><span class="n">A2</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> <span class="n">A1</span><span class="o">=</span><span class="mf">0.45</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">whole_life_annuity</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">variance</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">due</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">temporary_annuity</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">deferred_annuity</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">u</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">discrete</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">certain_life_annuity</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">u</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">increasing_annuity</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">decreasing_annuity</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prob</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">discrete</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">life</span><span class="o">.</span><span class="n">Y_t</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">prob</span><span class="p">,</span> <span class="n">discrete</span><span class="o">=</span><span class="n">discrete</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">Y_plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">discrete</span><span class="o">=</span><span class="n">discrete</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Y</span> <span class="o">=</span> <span class="n">life</span><span class="o">.</span><span class="n">Y_from_prob</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">prob</span><span class="o">=</span><span class="n">prob</span><span class="p">,</span> <span class="n">discrete</span><span class="o">=</span><span class="n">discrete</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">life</span><span class="o">.</span><span class="n">Y_to_t</span><span class="p">(</span><span class="n">Y</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">life</span><span class="o">.</span><span class="n">Y_from_t</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">discrete</span><span class="o">=</span><span class="n">discrete</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">life</span><span class="o">.</span><span class="n">Y_to_prob</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Y</span><span class="o">=</span><span class="n">Y</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">life</span> <span class="o">=</span> <span class="n">Annuity</span><span class="p">()</span><span class="o">.</span><span class="n">set_interest</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">var</span> <span class="o">=</span> <span class="n">life</span><span class="o">.</span><span class="n">annuity_variance</span><span class="p">(</span><span class="n">A2</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> <span class="n">A1</span><span class="o">=</span><span class="mf">0.45</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mean</span> <span class="o">=</span> <span class="n">life</span><span class="o">.</span><span class="n">annuity_twin</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="mf">0.45</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">life</span><span class="o">.</span><span class="n">portfolio_percentile</span><span class="p">(</span><span class="n">mean</span><span class="o">=</span><span class="n">mean</span><span class="p">,</span> <span class="n">variance</span><span class="o">=</span><span class="n">var</span><span class="p">,</span> <span class="n">prob</span><span class="o">=</span><span class="mf">.95</span><span class="p">,</span> <span class="n">N</span><span class="o">=</span><span class="mi">100</span><span class="p">))</span>
+</pre></div>
+</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="actuarialmath.annuity.Annuity.a_x">
 <span class="sig-name descname"><span class="pre">a_x</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x:</span> <span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">-999</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">u:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">benefit:</span> <span class="pre">~typing.Callable</span> <span class="pre">=</span> <span class="pre">&lt;function</span> <span class="pre">Annuity.&lt;lambda&gt;&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">discrete:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/actuarialmath/annuity.html#Annuity.a_x"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#actuarialmath.annuity.Annuity.a_x" title="Permalink to this definition"></a></dt>
-<dd><p>Numerically compute EPV of annuities from survival functions</p>
+<dd><p>Compute EPV of life annuity from survival function</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -139,6 +165,10 @@
 </ul>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">a_x</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -156,6 +186,10 @@
 </ul>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">immediate_annuity</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -170,6 +204,10 @@
 </ul>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">annuity_twin</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="mf">0.05879</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -184,6 +222,10 @@
 </ul>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">insurance_twin</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mf">19.7655</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -200,6 +242,10 @@
 </ul>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">annuity_variance</span><span class="p">(</span><span class="n">A2</span><span class="o">=</span><span class="mf">0.22</span><span class="p">,</span> <span class="n">A1</span><span class="o">=</span><span class="mf">0.45</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -217,6 +263,10 @@
 </ul>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">whole_life_annuity</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">variance</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">due</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -235,6 +285,10 @@
 </ul>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">temporary_annuity</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -253,6 +307,10 @@
 </ul>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">deferred_annuity</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">u</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">discrete</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -271,6 +329,10 @@
 </ul>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">certain_life_annuity</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">u</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -288,6 +350,10 @@
 </ul>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">increasing_annuity</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -305,6 +371,10 @@
 </ul>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">decreasing_annuity</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">

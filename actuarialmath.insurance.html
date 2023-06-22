@@ -122,6 +122,23 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">actuarialmath.insurance.</span></span><span class="sig-name descname"><span class="pre">Insurance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">udd</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/actuarialmath/insurance.html#Insurance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#actuarialmath.insurance.Insurance" title="Permalink to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="actuarialmath.fractional.html#actuarialmath.fractional.Fractional" title="actuarialmath.fractional.Fractional"><code class="xref py py-class docutils literal notranslate"><span class="pre">Fractional</span></code></a></p>
 <p>Compute expected present values of life insurance</p>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">life</span> <span class="o">=</span> <span class="n">Insurance</span><span class="p">()</span><span class="o">.</span><span class="n">set_interest</span><span class="p">(</span><span class="n">delta</span><span class="o">=</span><span class="mf">0.06</span><span class="p">)</span><span class="o">.</span><span class="n">set_survival</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="k">lambda</span> <span class="o">*</span><span class="n">x</span><span class="p">:</span> <span class="mf">0.04</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">whole_life_insurance</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">term_insurance</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">deferred_insurance</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">u</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">endowment_insurance</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">increasing_insurance</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">decreasing_insurance</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prob</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">discrete</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="kc">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">life</span><span class="o">.</span><span class="n">Z_t</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">prob</span><span class="p">,</span> <span class="n">discrete</span><span class="o">=</span><span class="n">discrete</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Z</span> <span class="o">=</span> <span class="n">life</span><span class="o">.</span><span class="n">Z_from_prob</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">prob</span><span class="o">=</span><span class="n">prob</span><span class="p">,</span> <span class="n">discrete</span><span class="o">=</span><span class="n">discrete</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">life</span><span class="o">.</span><span class="n">Z_to_t</span><span class="p">(</span><span class="n">Z</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">life</span><span class="o">.</span><span class="n">Z_from_t</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">discrete</span><span class="o">=</span><span class="n">discrete</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">life</span><span class="o">.</span><span class="n">Z_to_prob</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Z</span><span class="o">=</span><span class="n">Z</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">Z_plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">T</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">discrete</span><span class="o">=</span><span class="n">discrete</span><span class="p">)</span>
+</pre></div>
+</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="actuarialmath.insurance.Insurance.E_x">
 <span class="sig-name descname"><span class="pre">E_x</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">t</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endowment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">moment</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="_modules/actuarialmath/insurance.html#Insurance.E_x"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#actuarialmath.insurance.Insurance.E_x" title="Permalink to this definition"></a></dt>
@@ -137,6 +154,11 @@
 </ul>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">life</span> <span class="o">=</span> <span class="n">Insurance</span><span class="p">()</span><span class="o">.</span><span class="n">set_survival</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">t</span><span class="p">:</span> <span class="mf">0.02</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">.</span><span class="n">set_interest</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mf">0.03</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">var</span> <span class="o">=</span> <span class="n">life</span><span class="o">.</span><span class="n">E_x</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span> <span class="n">moment</span><span class="o">=</span><span class="n">life</span><span class="o">.</span><span class="n">VARIANCE</span><span class="p">,</span> <span class="n">endowment</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -157,6 +179,15 @@
 </ul>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">life</span> <span class="o">=</span> <span class="n">Insurance</span><span class="p">()</span><span class="o">.</span><span class="n">set_interest</span><span class="p">(</span><span class="n">delta</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span><span class="o">.</span><span class="n">set_survival</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">s</span><span class="p">:</span> <span class="mf">0.03</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">benefit</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">t</span><span class="p">:</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mf">0.04</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A</span> <span class="o">=</span> <span class="n">life</span><span class="o">.</span><span class="n">A_x</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">benefit</span><span class="o">=</span><span class="n">benefit</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>   <span class="c1"># 0.75</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">A2</span> <span class="o">=</span> <span class="n">life</span><span class="o">.</span><span class="n">A_x</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">moment</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">benefit</span><span class="o">=</span><span class="n">benefit</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">A2</span><span class="p">)</span>  <span class="c1">#0.60</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -189,6 +220,10 @@
 </ul>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">whole_life_insurance</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -207,6 +242,10 @@
 </ul>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">term_insurance</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -226,6 +265,10 @@
 </ul>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">deferred_insurance</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">u</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -245,6 +288,10 @@
 </ul>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">endowment_insurance</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -262,6 +309,10 @@
 </ul>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">increasing_insurance</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -279,6 +330,10 @@
 </ul>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">life</span><span class="o">.</span><span class="n">decreasing_insurance</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">

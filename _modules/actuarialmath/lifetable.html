@@ -108,12 +108,20 @@
 <span class="sd">      verbose : whether to echo update steps</span>
 
 <span class="sd">    Notes:</span>
-<span class="sd">      4 types of information can be loaded and calculated in the life table:</span>
+<span class="sd">      4 types of columns can be loaded and calculated in the life table:</span>
 
 <span class="sd">      - &#39;q&#39; : probability (x) dies in one year</span>
 <span class="sd">      - &#39;l&#39; : number of lives aged x</span>
 <span class="sd">      - &#39;d&#39; : number of deaths of age x</span>
 <span class="sd">      - &#39;p&#39; : probability (x) survives at least one year</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">      &gt;&gt;&gt; life = LifeTable(udd=True).set_table(l={90: 1000, 93: 825},</span>
+<span class="sd">      &gt;&gt;&gt;                                      d={97: 72},</span>
+<span class="sd">      &gt;&gt;&gt;                                      p={96: .2},</span>
+<span class="sd">      &gt;&gt;&gt;                                      q={95: .4, 97: 1})</span>
+<span class="sd">      &gt;&gt;&gt; print(life.q_r(90, u=93-90, t=95.5-93))</span>
+<span class="sd">      &gt;&gt;&gt; print(life.frame())</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">udd</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>

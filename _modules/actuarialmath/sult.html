@@ -113,6 +113,13 @@
 <span class="sd">      minage : minimum age</span>
 <span class="sd">      maxage : maximum age</span>
 <span class="sd">      S : survival function, default is Makeham with SOA FAM-L parameters</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">      &gt;&gt;&gt; sult = SULT()</span>
+<span class="sd">      &gt;&gt;&gt; a = sult.temporary_annuity(70, t=10)</span>
+<span class="sd">      &gt;&gt;&gt; A = sult.deferred_annuity(70, u=10)</span>
+<span class="sd">      &gt;&gt;&gt; P = sult.gross_premium(a=a, A=A, benefit=100000, initial_premium=0.75,</span>
+<span class="sd">      &gt;&gt;&gt;                        renewal_premium=0.05)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
 

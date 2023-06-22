@@ -100,11 +100,37 @@
 <span class="kn">from</span> <span class="nn">actuarialmath</span> <span class="kn">import</span> <span class="n">Insurance</span>
 
 <div class="viewcode-block" id="Annuity"><a class="viewcode-back" href="../../actuarialmath.annuity.html#actuarialmath.annuity.Annuity">[docs]</a><span class="k">class</span> <span class="nc">Annuity</span><span class="p">(</span><span class="n">Insurance</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute present values and relationships of life annuities&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute present values and relationships of life annuities</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">      &gt;&gt;&gt; life = Annuity().set_interest(delta=0.06).set_survival(mu=lambda *x: 0.04)</span>
+<span class="sd">      &gt;&gt;&gt; life.a_x(x=20)</span>
+<span class="sd">      &gt;&gt;&gt; life.immediate_annuity(x=20, t=30)</span>
+<span class="sd">      &gt;&gt;&gt; life.annuity_twin(A=0.05879)</span>
+<span class="sd">      &gt;&gt;&gt; life.insurance_twin(a=19.7655)</span>
+<span class="sd">      &gt;&gt;&gt; life.annuity_variance(A2=0.22, A1=0.45)</span>
+<span class="sd">      &gt;&gt;&gt; life.whole_life_annuity(x=24, variance=True, due=False)</span>
+<span class="sd">      &gt;&gt;&gt; life.temporary_annuity(x=24, t=10)</span>
+<span class="sd">      &gt;&gt;&gt; life.deferred_annuity(x=24, u=5, t=10, discrete=False)</span>
+<span class="sd">      &gt;&gt;&gt; life.certain_life_annuity(x=24, u=5, t=10)</span>
+<span class="sd">      &gt;&gt;&gt; life.increasing_annuity(x=24, t=10)</span>
+<span class="sd">      &gt;&gt;&gt; life.decreasing_annuity(x=24, t=10)</span>
+<span class="sd">      &gt;&gt;&gt; prob, x, discrete = 0.5, 0, False</span>
+<span class="sd">      &gt;&gt;&gt; t = life.Y_t(0, prob, discrete=discrete)</span>
+<span class="sd">      &gt;&gt;&gt; life.Y_plot(x=20, T=t, discrete=discrete)</span>
+<span class="sd">      &gt;&gt;&gt; Y = life.Y_from_prob(x, prob=prob, discrete=discrete)</span>
+<span class="sd">      &gt;&gt;&gt; print(t, life.Y_to_t(Y))</span>
+<span class="sd">      &gt;&gt;&gt; print(Y, life.Y_from_t(t, discrete=discrete))</span>
+<span class="sd">      &gt;&gt;&gt; print(prob, life.Y_to_prob(x, Y=Y))</span>
+<span class="sd">      &gt;&gt;&gt; life = Annuity().set_interest(i=0.05)</span>
+<span class="sd">      &gt;&gt;&gt; var = life.annuity_variance(A2=0.22, A1=0.45)</span>
+<span class="sd">      &gt;&gt;&gt; mean = life.annuity_twin(A=0.45)</span>
+<span class="sd">      &gt;&gt;&gt; print(life.portfolio_percentile(mean=mean, variance=var, prob=.95, N=100))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="Annuity.a_x"><a class="viewcode-back" href="../../actuarialmath.annuity.html#actuarialmath.annuity.Annuity.a_x">[docs]</a>    <span class="k">def</span> <span class="nf">a_x</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">Insurance</span><span class="o">.</span><span class="n">WHOLE</span><span class="p">,</span> <span class="n">u</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
             <span class="n">benefit</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">t</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="n">discrete</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Numerically compute EPV of annuities from survival functions</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute EPV of life annuity from survival function</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">          x : age of selection</span>
@@ -113,6 +139,9 @@
 <span class="sd">          t : term of insurance</span>
 <span class="sd">          benefit : benefit as a function of age and year</span>
 <span class="sd">          discrete : annuity due (True) or continuous (False)</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">          &gt;&gt;&gt; life.a_x(x=20)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_term</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">s</span><span class="o">+</span><span class="n">u</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">discrete</span><span class="p">:</span>
@@ -135,6 +164,9 @@
 <span class="sd">          t : term of insurance</span>
 <span class="sd">          b : benefit amount</span>
 <span class="sd">          variance : return EPV (False) or variance (True)</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">          &gt;&gt;&gt; life.immediate_annuity(x=20, t=30)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">variance</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">temporary_annuity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">add_term</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">b</span><span class="o">=</span><span class="n">b</span><span class="p">,</span>
@@ -148,6 +180,9 @@
 <span class="sd">        Args:</span>
 <span class="sd">          A : cost of insurance</span>
 <span class="sd">          discrete : discrete/annuity due (True) or continuous (False)</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">          &gt;&gt;&gt; life.annuity_twin(A=0.05879)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">interest</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interest</span><span class="o">.</span><span class="n">d</span> <span class="k">if</span> <span class="n">discrete</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">interest</span><span class="o">.</span><span class="n">delta</span><span class="p">)</span>
         <span class="k">return</span> <span class="p">((</span><span class="mi">1</span> <span class="o">-</span> <span class="n">A</span><span class="p">)</span> <span class="o">/</span> <span class="n">interest</span><span class="p">)</span> <span class="k">if</span> <span class="n">interest</span> <span class="k">else</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">A</span></div>
@@ -159,6 +194,9 @@
 <span class="sd">        Args:</span>
 <span class="sd">          a : cost of annuity</span>
 <span class="sd">          discrete : discrete/annuity due (True) or continuous (False)</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">          &gt;&gt;&gt; life.insurance_twin(a=19.7655)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">assert</span> <span class="n">moment</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">interest</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interest</span><span class="o">.</span><span class="n">d</span> <span class="k">if</span> <span class="n">discrete</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">interest</span><span class="o">.</span><span class="n">delta</span><span class="p">)</span>
@@ -173,6 +211,9 @@
 <span class="sd">          A1 : first moment of insurance factor</span>
 <span class="sd">          b : annuity benefit amount</span>
 <span class="sd">          discrete : discrete/annuity due (True) or continuous (False)</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">          &gt;&gt;&gt; life.annuity_variance(A2=0.22, A1=0.45)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">interest</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">interest</span><span class="o">.</span><span class="n">d</span> <span class="k">if</span> <span class="n">discrete</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">interest</span><span class="o">.</span><span class="n">delta</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">interest</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -191,6 +232,9 @@
 <span class="sd">          b : annuity benefit amount</span>
 <span class="sd">          variance : return EPV (True) or variance (False)</span>
 <span class="sd">          discrete : annuity due (True) or continuous (False)</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">          &gt;&gt;&gt; life.whole_life_annuity(x=24, variance=True, due=False)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">interest</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">interest</span><span class="o">.</span><span class="n">d</span> <span class="k">if</span> <span class="n">discrete</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">interest</span><span class="o">.</span><span class="n">delta</span>
         <span class="k">if</span> <span class="n">variance</span><span class="p">:</span>  <span class="c1"># short cut for variance of whole life</span>
@@ -216,6 +260,9 @@
 <span class="sd">          b (int) : annuity benefit amount</span>
 <span class="sd">          variance : return EPV (True) or variance (False)</span>
 <span class="sd">          discrete : annuity due (True) or continuous (False)</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">          &gt;&gt;&gt; life.temporary_annuity(x=24, t=10)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">variance</span><span class="p">:</span>  <span class="c1"># short cut for variance of temporary life annuity</span>
             <span class="n">A1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">endowment_insurance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">discrete</span><span class="o">=</span><span class="n">discrete</span><span class="p">)</span>
@@ -242,6 +289,9 @@
 <span class="sd">          t : term of annuity in years</span>
 <span class="sd">          b : annuity benefit amount</span>
 <span class="sd">          discrete : annuity due (True) or continuous (False)</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">          &gt;&gt;&gt; life.deferred_annuity(x=24, u=5, t=10, discrete=False)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">temporary_annuity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="o">+</span><span class="n">u</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">b</span><span class="p">,</span> <span class="n">discrete</span><span class="o">=</span><span class="n">discrete</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">E_x</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">u</span><span class="p">)</span> <span class="o">*</span> <span class="n">a</span></div>
@@ -258,6 +308,9 @@
 <span class="sd">          t : term of life annuity in years</span>
 <span class="sd">          b : annuity benefit amount</span>
 <span class="sd">          discrete : annuity due (True) or continuous (False)</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">          &gt;&gt;&gt; life.certain_life_annuity(x=24, u=5, t=10)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">u</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_term</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">s</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">u</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -275,6 +328,9 @@
 <span class="sd">          t : term of life annuity in years</span>
 <span class="sd">          b : benefit amount at end of first year</span>
 <span class="sd">          discrete : annuity due (True) or continuous (False)</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">          &gt;&gt;&gt; life.increasing_annuity(x=24, t=10)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_term</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">)</span>
         <span class="n">benefit</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="n">b</span> <span class="o">*</span> <span class="p">(</span><span class="n">s</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># increasing benefit</span>
@@ -290,6 +346,9 @@
 <span class="sd">          t : term of life annuity in years</span>
 <span class="sd">          b : benefit amount at end of first year</span>
 <span class="sd">          discrete : annuity due (True) or continuous (False)</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">          &gt;&gt;&gt; life.decreasing_annuity(x=24, t=10)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">assert</span> <span class="n">t</span> <span class="o">&gt;=</span> <span class="mi">0</span>   <span class="c1"># decreasing must be till term</span>
         <span class="n">t</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_term</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">)</span>

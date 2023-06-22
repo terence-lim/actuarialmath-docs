@@ -105,6 +105,13 @@
 <span class="sd">    Args:</span>
 <span class="sd">      m : number of payments per year</span>
 <span class="sd">      life : original survival and life contingent functions</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">      &gt;&gt;&gt; mthly = Mthly(m=12, life=Annuity().set_interest(i=0.06))</span>
+<span class="sd">      &gt;&gt;&gt; A1, A2 = 0.4075, 0.2105</span>
+<span class="sd">      &gt;&gt;&gt; mean = mthly.annuity_twin(A1)*15*12</span>
+<span class="sd">      &gt;&gt;&gt; var = mthly.annuity_variance(A1=A1, A2=A2, b=15 * 12)</span>
+<span class="sd">      &gt;&gt;&gt; S = Annuity.portfolio_percentile(mean=mean, variance=var, prob=.9, N=200)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">_methods</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;v_m&#39;</span><span class="p">,</span> <span class="s1">&#39;p_m&#39;</span><span class="p">,</span> <span class="s1">&#39;q_m&#39;</span><span class="p">,</span> <span class="s1">&#39;Z_m&#39;</span><span class="p">,</span> <span class="s1">&#39;E_x&#39;</span><span class="p">,</span> <span class="s1">&#39;A_x&#39;</span><span class="p">,</span>
                  <span class="s1">&#39;whole_life_insurance&#39;</span><span class="p">,</span> <span class="s1">&#39;term_insurance&#39;</span><span class="p">,</span> <span class="s1">&#39;deferred_insurance&#39;</span><span class="p">,</span>
@@ -179,6 +186,11 @@
 <span class="sd">        </span>
 <span class="sd">        Returns:</span>
 <span class="sd">          DataFrame, indexed by mthly period, with column names [&#39;Z&#39;, &#39;p&#39;]</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">          &gt;&gt;&gt; life = LifeTable(udd=False).set_table(q={0:.16,1:.23}).set_interest(i_m=.18,m=2)</span>
+<span class="sd">          &gt;&gt;&gt; mthly = Mthly(m=2, life=life)</span>
+<span class="sd">          &gt;&gt;&gt; Z = mthly.Z_m(0, t=2, benefit=lambda x,t: 300000 + t*30000*2)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">Z</span> <span class="o">=</span> <span class="p">[(</span><span class="n">benefit</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">s</span><span class="p">,</span> <span class="n">k</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">v_m</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">**</span><span class="n">moment</span> 
              <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">t</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">)]</span>

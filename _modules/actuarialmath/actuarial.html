@@ -108,6 +108,16 @@
 <span class="sd">      VARIANCE : select variance as the statistical moment to calculate</span>
 
 <span class="sd">      WHOLE : indicates that term of insurance or annuity is Whole Life</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">      &gt;&gt;&gt; actuarial = Actuarial()</span>
+<span class="sd">      &gt;&gt;&gt; def as_term(t): return &quot;WHOLE_LIFE&quot; if t == Actuarial.WHOLE else t    </span>
+<span class="sd">      &gt;&gt;&gt; for a,b in [(3, Actuarial.WHOLE), (3, 2), (3, -1)]:</span>
+<span class="sd">      &gt;&gt;&gt;     print(f&quot;({as_term(a)}) + ({as_term(b)}) =&quot;,</span>
+<span class="sd">      &gt;&gt;&gt;           as_term(actuarial.add_term(a, b)))        </span>
+<span class="sd">      &gt;&gt;&gt; print(Actuarial.solve(fun=lambda omega: 1/omega, </span>
+<span class="sd">      &gt;&gt;&gt;                       target=0.05, grid=[1, 100]))</span>
+<span class="sd">      &gt;&gt;&gt; print(Actuarial.derivative(fun=lambda x: x/50, x=25))</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># constants</span>
     <span class="n">VARIANCE</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span>

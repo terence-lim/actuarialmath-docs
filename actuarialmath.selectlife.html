@@ -62,8 +62,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#actuarialmath.selectlife.SelectLife.__getitem__"><code class="docutils literal notranslate"><span class="pre">SelectLife.__getitem__()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#actuarialmath.selectlife.SelectLife.set_table"><code class="docutils literal notranslate"><span class="pre">SelectLife.set_table()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#actuarialmath.selectlife.SelectLife.set_select"><code class="docutils literal notranslate"><span class="pre">SelectLife.set_select()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.selectlife.SelectLife.get_sel"><code class="docutils literal notranslate"><span class="pre">SelectLife.get_sel()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#actuarialmath.selectlife.SelectLife.isin_sel"><code class="docutils literal notranslate"><span class="pre">SelectLife.isin_sel()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#actuarialmath.selectlife.SelectLife.fill_table"><code class="docutils literal notranslate"><span class="pre">SelectLife.fill_table()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#actuarialmath.selectlife.SelectLife.A_x"><code class="docutils literal notranslate"><span class="pre">SelectLife.A_x()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#actuarialmath.selectlife.SelectLife.a_x"><code class="docutils literal notranslate"><span class="pre">SelectLife.a_x()</span></code></a></li>
@@ -127,7 +125,7 @@
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>6 types of information can be loaded and calculated in the select table:</p>
+<p>6 types of columns can be loaded and calculated in the select table:</p>
 <ul class="simple">
 <li><p>‘q’ : probability [x]+s dies in one year</p></li>
 <li><p>‘l’ : number of lives aged [x]+s</p></li>
@@ -136,6 +134,15 @@
 <li><p>‘a’ : whole life annuity</p></li>
 <li><p>‘e’ : expected future curtate lifetime of [x]+s</p></li>
 </ul>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">life</span> <span class="o">=</span> <span class="n">SelectLife</span><span class="p">()</span><span class="o">.</span><span class="n">set_interest</span><span class="p">(</span><span class="n">i</span><span class="o">=</span><span class="mf">0.04</span><span class="p">)</span><span class="o">.</span><span class="n">set_table</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="p">{</span><span class="mi">65</span><span class="p">:</span> <span class="p">[</span><span class="mf">.08</span><span class="p">,</span> <span class="mf">.10</span><span class="p">,</span> <span class="mf">.12</span><span class="p">,</span> <span class="mf">.14</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>                                                      <span class="mi">66</span><span class="p">:</span> <span class="p">[</span><span class="mf">.09</span><span class="p">,</span> <span class="mf">.11</span><span class="p">,</span> <span class="mf">.13</span><span class="p">,</span> <span class="mf">.15</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>                                                      <span class="mi">67</span><span class="p">:</span> <span class="p">[</span><span class="mf">.10</span><span class="p">,</span> <span class="mf">.12</span><span class="p">,</span> <span class="mf">.14</span><span class="p">,</span> <span class="mf">.16</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>                                                      <span class="mi">68</span><span class="p">:</span> <span class="p">[</span><span class="mf">.11</span><span class="p">,</span> <span class="mf">.13</span><span class="p">,</span> <span class="mf">.15</span><span class="p">,</span> <span class="mf">.17</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>                                                      <span class="mi">69</span><span class="p">:</span> <span class="p">[</span><span class="mf">.12</span><span class="p">,</span> <span class="mf">.14</span><span class="p">,</span> <span class="mf">.16</span><span class="p">,</span> <span class="mf">.18</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">life</span><span class="o">.</span><span class="n">deferred_insurance</span><span class="p">(</span><span class="mi">65</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">u</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">2000</span><span class="p">))</span>
+</pre></div>
+</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="actuarialmath.selectlife.SelectLife.__getitem__">
 <span class="sig-name descname"><span class="pre">__getitem__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/actuarialmath/selectlife.html#SelectLife.__getitem__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#actuarialmath.selectlife.SelectLife.__getitem__" title="Permalink to this definition"></a></dt>
@@ -163,6 +170,15 @@
 </ul>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">life</span> <span class="o">=</span> <span class="n">SelectLife</span><span class="p">()</span><span class="o">.</span><span class="n">set_table</span><span class="p">(</span><span class="n">l</span><span class="o">=</span><span class="p">{</span><span class="mi">55</span><span class="p">:</span> <span class="p">[</span><span class="mi">10000</span><span class="p">,</span> <span class="mi">9493</span><span class="p">,</span> <span class="mi">8533</span><span class="p">,</span> <span class="mi">7664</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>                                 <span class="mi">56</span><span class="p">:</span> <span class="p">[</span><span class="mi">8547</span><span class="p">,</span> <span class="mi">8028</span><span class="p">,</span> <span class="mi">6889</span><span class="p">,</span> <span class="mi">5630</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>                                 <span class="mi">57</span><span class="p">:</span> <span class="p">[</span><span class="mi">7011</span><span class="p">,</span> <span class="mi">6443</span><span class="p">,</span> <span class="mi">5395</span><span class="p">,</span> <span class="mi">3904</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>                                 <span class="mi">58</span><span class="p">:</span> <span class="p">[</span><span class="mi">5853</span><span class="p">,</span> <span class="mi">4846</span><span class="p">,</span> <span class="mi">3548</span><span class="p">,</span> <span class="mi">2210</span><span class="p">]},</span>
+<span class="gp">&gt;&gt;&gt; </span>                              <span class="n">e</span><span class="o">=</span><span class="p">{</span><span class="mi">57</span><span class="p">:</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">life</span><span class="o">.</span><span class="n">e_r</span><span class="p">(</span><span class="mi">58</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -183,18 +199,6 @@
 </ul>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="actuarialmath.selectlife.SelectLife.get_sel">
-<span class="sig-name descname"><span class="pre">get_sel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span><a class="reference internal" href="_modules/actuarialmath/selectlife.html#SelectLife.get_sel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#actuarialmath.selectlife.SelectLife.get_sel" title="Permalink to this definition"></a></dt>
-<dd><p>Helper to read right across, and down if neccesary (when s &gt; n)</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="actuarialmath.selectlife.SelectLife.isin_sel">
-<span class="sig-name descname"><span class="pre">isin_sel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">table</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/actuarialmath/selectlife.html#SelectLife.isin_sel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#actuarialmath.selectlife.SelectLife.isin_sel" title="Permalink to this definition"></a></dt>
-<dd><p>Helper to check if value not missing</p>
 </dd></dl>
 
 <dl class="py method">
@@ -305,6 +309,15 @@
 <dd class="field-odd"><p><strong>table</strong> – table to return, one of [‘A’, ‘a’, ‘q’, ‘d’, ‘e’, ‘l’]</p>
 </dd>
 </dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">table</span><span class="o">=</span><span class="p">{</span><span class="mi">21</span><span class="p">:</span> <span class="p">[</span><span class="mf">.00120</span><span class="p">,</span> <span class="mf">.00150</span><span class="p">,</span> <span class="mf">.00170</span><span class="p">,</span> <span class="mf">.00180</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>       <span class="mi">22</span><span class="p">:</span> <span class="p">[</span><span class="mf">.00125</span><span class="p">,</span> <span class="mf">.00155</span><span class="p">,</span> <span class="mf">.00175</span><span class="p">,</span> <span class="mf">.00185</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span>       <span class="mi">23</span><span class="p">:</span> <span class="p">[</span><span class="mf">.00130</span><span class="p">,</span> <span class="mf">.00160</span><span class="p">,</span> <span class="mf">.00180</span><span class="p">,</span> <span class="mf">.00195</span><span class="p">]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">life</span> <span class="o">=</span> <span class="n">SelectLife</span><span class="p">(</span><span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">set_table</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="n">table</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">life</span><span class="o">.</span><span class="n">frame</span><span class="p">(</span><span class="s1">&#39;l&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">life</span><span class="o">.</span><span class="n">frame</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">6</span><span class="p">))</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </dd></dl>

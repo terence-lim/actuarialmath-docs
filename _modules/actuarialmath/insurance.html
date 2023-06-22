@@ -100,7 +100,25 @@
 <span class="kn">from</span> <span class="nn">actuarialmath</span> <span class="kn">import</span> <span class="n">Fractional</span>
 
 <div class="viewcode-block" id="Insurance"><a class="viewcode-back" href="../../actuarialmath.insurance.html#actuarialmath.insurance.Insurance">[docs]</a><span class="k">class</span> <span class="nc">Insurance</span><span class="p">(</span><span class="n">Fractional</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute expected present values of life insurance&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute expected present values of life insurance</span>
+
+
+<span class="sd">    Examples:</span>
+<span class="sd">      &gt;&gt;&gt; life = Insurance().set_interest(delta=0.06).set_survival(mu=lambda *x: 0.04)</span>
+<span class="sd">      &gt;&gt;&gt; life.whole_life_insurance(x=0)</span>
+<span class="sd">      &gt;&gt;&gt; life.term_insurance(x=0, t=30)</span>
+<span class="sd">      &gt;&gt;&gt; life.deferred_insurance(x=0, u=10, t=20)</span>
+<span class="sd">      &gt;&gt;&gt; life.endowment_insurance(x=0, t=10)</span>
+<span class="sd">      &gt;&gt;&gt; life.increasing_insurance(x=0, t=10)</span>
+<span class="sd">      &gt;&gt;&gt; life.decreasing_insurance(x=0, t=10)</span>
+<span class="sd">      &gt;&gt;&gt; prob, x, discrete = 0.8, 20, True</span>
+<span class="sd">      &gt;&gt;&gt; t = life.Z_t(x, prob, discrete=discrete)</span>
+<span class="sd">      &gt;&gt;&gt; Z = life.Z_from_prob(x, prob=prob, discrete=discrete)</span>
+<span class="sd">      &gt;&gt;&gt; print(t, life.Z_to_t(Z))</span>
+<span class="sd">      &gt;&gt;&gt; print(Z, life.Z_from_t(t, discrete=discrete))</span>
+<span class="sd">      &gt;&gt;&gt; print(prob, life.Z_to_prob(x, Z=Z))</span>
+<span class="sd">      &gt;&gt;&gt; life.Z_plot(x, T=t, discrete=discrete)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="Insurance.E_x"><a class="viewcode-back" href="../../actuarialmath.insurance.html#actuarialmath.insurance.Insurance.E_x">[docs]</a>    <span class="k">def</span> <span class="nf">E_x</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">t</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">endowment</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
             <span class="n">moment</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
@@ -112,6 +130,10 @@
 <span class="sd">          t : term of pure endowment</span>
 <span class="sd">          endowment : amount of pure endowment</span>
 <span class="sd">          moment : compute first or second moment</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">          &gt;&gt;&gt; life = Insurance().set_survival(mu=lambda x,t: 0.02*t).set_interest(i=0.03)</span>
+<span class="sd">          &gt;&gt;&gt; var = life.E_x(0, t=15, moment=life.VARIANCE, endowment=10000)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>  <span class="c1"># t infinite =&gt; EPV(t) = 0</span>
             <span class="k">return</span> <span class="mi">0</span>   
@@ -137,6 +159,14 @@
 <span class="sd">          endowment : amount of endowment for endowment insurance</span>
 <span class="sd">          moment : compute first or second moment</span>
 <span class="sd">          discrete : benefit paid yearend (True) or moment of death (False)</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">          &gt;&gt;&gt; life = Insurance().set_interest(delta=0.05).set_survival(mu=lambda x,s: 0.03)</span>
+<span class="sd">          &gt;&gt;&gt; benefit = lambda x,t: math.exp(0.04 * t)</span>
+<span class="sd">          &gt;&gt;&gt; A = life.A_x(0, benefit=benefit)</span>
+<span class="sd">          &gt;&gt;&gt; print(A)   # 0.75</span>
+<span class="sd">          &gt;&gt;&gt; A2 = life.A_x(0, moment=2, benefit=benefit)</span>
+<span class="sd">          &gt;&gt;&gt; print(A2)  #0.60</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">assert</span> <span class="n">moment</span> <span class="o">&gt;=</span> <span class="mi">1</span>
         <span class="k">if</span> <span class="n">t</span> <span class="o">&gt;=</span><span class="mi">0</span> <span class="ow">and</span> <span class="n">endowment</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -174,6 +204,9 @@
 <span class="sd">          b : amount of benefit</span>
 <span class="sd">          moment : compute first or second moment</span>
 <span class="sd">          discrete : benefit paid year-end (True) or moment of death (False)</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">          &gt;&gt;&gt; life.whole_life_insurance(x=0)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">moment</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">VARIANCE</span><span class="p">:</span>
             <span class="n">A2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">whole_life_insurance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">,</span> <span class="n">moment</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">discrete</span><span class="o">=</span><span class="n">discrete</span><span class="p">)</span>
@@ -193,6 +226,9 @@
 <span class="sd">          b : amount of benefit</span>
 <span class="sd">          moment : compute first or second moment</span>
 <span class="sd">          discrete : benefit paid year-end (True) or moment of death (False)</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">          &gt;&gt;&gt; life.term_insurance(x=0, t=30)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">moment</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">VARIANCE</span><span class="p">:</span>
             <span class="n">A2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">term_insurance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">moment</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">discrete</span><span class="o">=</span><span class="n">discrete</span><span class="p">)</span>
@@ -220,6 +256,9 @@
 <span class="sd">          b : amount of benefit</span>
 <span class="sd">          moment : compute first or second moment</span>
 <span class="sd">          discrete : benefit paid year-end (True) or moment of death (False)</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">          &gt;&gt;&gt; life.deferred_insurance(x=0, u=10, t=20)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_term</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">s</span><span class="p">,</span> <span class="n">u</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">u</span><span class="p">:</span>
             <span class="k">return</span> <span class="mf">0.</span>        
@@ -246,6 +285,9 @@
 <span class="sd">          endowment : amount of endowment paid at end of term if survive</span>
 <span class="sd">          moment : compute first or second moment</span>
 <span class="sd">          discrete : benefit paid year-end (True) or moment of death (False)</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">          &gt;&gt;&gt; life.endowment_insurance(x=0, t=10)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">moment</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">VARIANCE</span><span class="p">:</span>
             <span class="n">A2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">endowment_insurance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">endowment</span><span class="o">=</span><span class="n">endowment</span><span class="p">,</span> 
@@ -269,6 +311,9 @@
 <span class="sd">          t : term of insurance</span>
 <span class="sd">          b : amount of benefit in first year</span>
 <span class="sd">          discrete : benefit paid year-end (True) or moment of death (False)</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">          &gt;&gt;&gt; life.increasing_insurance(x=0, t=10)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">A_x</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">benefit</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">t</span><span class="p">:</span> <span class="n">t</span> <span class="o">*</span> <span class="n">b</span><span class="p">,</span> 
                         <span class="n">discrete</span><span class="o">=</span><span class="n">discrete</span><span class="p">)</span></div>
@@ -283,6 +328,9 @@
 <span class="sd">          t : term of insurance</span>
 <span class="sd">          b : amount of benefit in first year</span>
 <span class="sd">          discrete : benefit paid year-end (True) or moment of death (False)</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">          &gt;&gt;&gt; life.decreasing_insurance(x=0, t=10)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">assert</span> <span class="n">t</span> <span class="o">&gt;</span> <span class="mi">0</span>  <span class="c1"># decreasing must be term insurance</span>
         <span class="n">A</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">term_insurance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">b</span><span class="p">,</span> <span class="n">discrete</span><span class="o">=</span><span class="n">discrete</span><span class="p">)</span>

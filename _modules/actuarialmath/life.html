@@ -102,7 +102,14 @@
 <span class="kn">from</span> <span class="nn">actuarialmath</span> <span class="kn">import</span> <span class="n">Actuarial</span><span class="p">,</span> <span class="n">Interest</span>
 
 <div class="viewcode-block" id="Life"><a class="viewcode-back" href="../../actuarialmath.life.html#actuarialmath.life.Life">[docs]</a><span class="k">class</span> <span class="nc">Life</span><span class="p">(</span><span class="n">Actuarial</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute moments and probabilities&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute moments and probabilities</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">      &gt;&gt;&gt; p1 = (1. - 0.02) * (1. - 0.01)  # 2_p_x if vaccine given</span>
+<span class="sd">      &gt;&gt;&gt; p2 = (1. - 0.02) * (1. - 0.02)  # 2_p_x if vaccine not given</span>
+<span class="sd">      &gt;&gt;&gt; conditional = math.sqrt(Life.conditional_variance(p=.2, p1=p1, p2=p2, N=100000))</span>
+<span class="sd">      &gt;&gt;&gt; mixture = math.sqrt(Life.mixture(p=.2, p1=p1, p2=p2, N=100000, variance=True))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>

@@ -104,6 +104,18 @@
 <span class="sd">    Args:</span>
 <span class="sd">      m : number of payments per year</span>
 <span class="sd">      life : original fractional survival and mortality functions</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">      &gt;&gt;&gt; x = 0</span>
+<span class="sd">      &gt;&gt;&gt; life = Recursion().set_interest(i=0.05).set_a(9.19, x=x)</span>
+<span class="sd">      &gt;&gt;&gt; benefits = UDD(m=0, life=life).whole_life_insurance(x)</span>
+<span class="sd">      &gt;&gt;&gt; payments = UDD(m=12, life=life).whole_life_annuity(x)</span>
+<span class="sd">      &gt;&gt;&gt; print(benefits, payments)</span>
+<span class="sd">      &gt;&gt;&gt; print(life.gross_premium(a=payments, A=benefits, benefit=100000)/12)</span>
+<span class="sd">      &gt;&gt;&gt; life = SULT(udd=True)</span>
+<span class="sd">      &gt;&gt;&gt; a = UDD(m=12, life=life).temporary_annuity(45, t=20)</span>
+<span class="sd">      &gt;&gt;&gt; A = UDD(m=0, life=life).whole_life_insurance(45)</span>
+<span class="sd">      &gt;&gt;&gt; print(life.gross_premium(A=A, a=a, benefit=100000)/12)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">life</span><span class="p">:</span> <span class="n">Annuity</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>

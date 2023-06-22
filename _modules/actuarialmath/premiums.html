@@ -96,7 +96,19 @@
 <span class="kn">from</span> <span class="nn">actuarialmath</span> <span class="kn">import</span> <span class="n">Annuity</span>
 
 <div class="viewcode-block" id="Premiums"><a class="viewcode-back" href="../../actuarialmath.premiums.html#actuarialmath.premiums.Premiums">[docs]</a><span class="k">class</span> <span class="nc">Premiums</span><span class="p">(</span><span class="n">Annuity</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute et and gross premiums under equivalence principle&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute et and gross premiums under equivalence principle</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">      &gt;&gt;&gt; life = Premiums().set_interest(delta=0.06).set_survival(mu=lambda x,s: 0.04)</span>
+<span class="sd">      &gt;&gt;&gt; print(life.net_premium(x=0))</span>
+<span class="sd">      &gt;&gt;&gt; life = Premiums().set_interest(i=0.05)</span>
+<span class="sd">      &gt;&gt;&gt; var = life.annuity_variance(A2=0.22, A1=0.45)</span>
+<span class="sd">      &gt;&gt;&gt; mean = life.annuity_twin(A=0.45)</span>
+<span class="sd">      &gt;&gt;&gt; fund = life.portfolio_percentile(mean, var, prob=.95, N=100)</span>
+<span class="sd">      &gt;&gt;&gt; life = Premiums().set_interest(d=0.05)</span>
+<span class="sd">      &gt;&gt;&gt; A = life.insurance_equivalence(premium=2143, b=100000)</span>
+<span class="sd">      &gt;&gt;&gt; a = life.annuity_equivalence(premium=2143, b=100000)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1">#</span>
     <span class="c1"># Net level premiums for special insurances</span>
@@ -120,6 +132,11 @@
 <span class="sd">          return_premium : if premiums without interest refunded at death </span>
 <span class="sd">          annuity : whether benefit is insurance (False) or deferred annuity</span>
 <span class="sd">          discrete : whether annuity due (True) or continuous (False)</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">          &gt;&gt;&gt; life = Premiums().set_interest(delta=0.06).set_survival(mu=lambda x,s: 0.04)</span>
+<span class="sd">          &gt;&gt;&gt; print(life.net_premium(x=0))</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">annuity</span><span class="p">:</span>
             <span class="n">A</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">deferred_annuity</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">b</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">u</span><span class="o">=</span><span class="n">u</span><span class="p">,</span> 
@@ -151,6 +168,10 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">          Insurance factor value, given net premium under equivalence principle</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">          &gt;&gt;&gt; life = Premiums().set_interest(d=0.05)</span>
+<span class="sd">          &gt;&gt;&gt; A = life.insurance_equivalence(premium=2143, b=100000)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">interest</span><span class="o">.</span><span class="n">d</span> <span class="k">if</span> <span class="n">discrete</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">interest</span><span class="o">.</span><span class="n">delta</span>
         <span class="k">return</span> <span class="n">premium</span> <span class="o">/</span> <span class="p">(</span><span class="n">d</span><span class="o">*</span><span class="n">b</span> <span class="o">+</span> <span class="n">premium</span><span class="p">)</span>  <span class="c1"># from P = b[dA/(1-A)]</span></div>
@@ -166,11 +187,16 @@
 
 <span class="sd">        Returns:</span>
 <span class="sd">          Annuity factor value, given net premium under equivalence principle</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">          &gt;&gt;&gt; life = Premiums().set_interest(d=0.05)</span>
+<span class="sd">          &gt;&gt;&gt; a = life.annuity_equivalence(premium=2143, b=100000)</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">interest</span><span class="o">.</span><span class="n">d</span> <span class="k">if</span> <span class="n">discrete</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">interest</span><span class="o">.</span><span class="n">delta</span>
         <span class="k">return</span> <span class="n">b</span> <span class="o">/</span> <span class="p">(</span><span class="n">d</span><span class="o">*</span><span class="n">b</span> <span class="o">+</span> <span class="n">premium</span><span class="p">)</span>  <span class="c1"># from P = b * (1/a - d)</span></div>
 
-<div class="viewcode-block" id="Premiums.premium_equivalence"><a class="viewcode-back" href="../../actuarialmath.premiums.html#actuarialmath.premiums.Premiums.premium_equivalence">[docs]</a>    <span class="k">def</span> <span class="nf">premium_equivalence</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">A</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="Premiums.premium_equivalence"><a class="viewcode-back" href="../../actuarialmath.premiums.html#actuarialmath.premiums.Premiums.premium_equivalence">[docs]</a>    <span class="k">def</span> <span class="nf">premium_equivalence</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                            <span class="n">A</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                             <span class="n">a</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                             <span class="n">b</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">discrete</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Compute premium from whole life or endowment insurance and annuity factors</span>
@@ -195,7 +221,8 @@
     <span class="c1">#</span>
     <span class="c1"># Gross premiums for special insurances</span>
     <span class="c1">#</span>
-<div class="viewcode-block" id="Premiums.gross_premium"><a class="viewcode-back" href="../../actuarialmath.premiums.html#actuarialmath.premiums.Premiums.gross_premium">[docs]</a>    <span class="k">def</span> <span class="nf">gross_premium</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> 
+<div class="viewcode-block" id="Premiums.gross_premium"><a class="viewcode-back" href="../../actuarialmath.premiums.html#actuarialmath.premiums.Premiums.gross_premium">[docs]</a>    <span class="k">def</span> <span class="nf">gross_premium</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                      <span class="n">a</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> 
                       <span class="n">A</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">IA</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> 
                       <span class="n">discrete</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">benefit</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
                       <span class="n">E</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">endowment</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> 
@@ -219,6 +246,18 @@
 <span class="sd">          initial_premium : initial premium per $ of gross premium</span>
 <span class="sd">          renewal_premium : renewal premium per $ of gross premium</span>
 <span class="sd">          discrete : annuity due (True) or continuous (False)</span>
+
+<span class="sd">        Examples:</span>
+<span class="sd">          &gt;&gt;&gt; life = Premiums()</span>
+<span class="sd">          &gt;&gt;&gt; A, IA, a = 0.17094, 0.96728, 6.8865</span>
+<span class="sd">          &gt;&gt;&gt; print(life.gross_premium(a=a,</span>
+<span class="sd">          &gt;&gt;&gt;                        A=A,</span>
+<span class="sd">          &gt;&gt;&gt;                        IA=IA,</span>
+<span class="sd">          &gt;&gt;&gt;                        benefit=100000,</span>
+<span class="sd">          &gt;&gt;&gt;                        initial_premium=0.5,</span>
+<span class="sd">          &gt;&gt;&gt;                        renewal_premium=.05,</span>
+<span class="sd">          &gt;&gt;&gt;                        renewal_policy=200,</span>
+<span class="sd">          &gt;&gt;&gt;                        initial_policy=200))</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">a</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>    <span class="c1"># assume WL or Endowment Insurance for twin</span>
             <span class="n">a</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">annuity_twin</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">discrete</span><span class="o">=</span><span class="n">discrete</span><span class="p">)</span>
@@ -270,9 +309,9 @@
                            <span class="n">benefit</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span>
                            <span class="n">settlement_policy</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                            <span class="n">initial_policy</span><span class="o">=</span><span class="mi">250</span><span class="p">,</span>
-                           <span class="n">initial_premium</span><span class="o">=</span><span class="mf">.04</span><span class="o">+</span><span class="mf">.35</span><span class="p">,</span>
+                           <span class="n">initial_premium</span><span class="o">=</span><span class="mf">0.04</span> <span class="o">+</span> <span class="mf">0.35</span><span class="p">,</span>
                            <span class="n">renewal_policy</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
-                           <span class="n">renewal_premium</span><span class="o">=</span><span class="mf">.04</span><span class="o">+</span><span class="mf">.02</span><span class="p">)</span> 
+                           <span class="n">renewal_premium</span><span class="o">=</span><span class="mf">0.04</span> <span class="o">+</span> <span class="mf">0.02</span><span class="p">)</span> 
     <span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">()</span>
 

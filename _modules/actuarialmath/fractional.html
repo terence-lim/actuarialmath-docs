@@ -102,6 +102,15 @@
 
 <span class="sd">    Args:</span>
 <span class="sd">      udd : select UDD (True, default) or CFM (False) between integer ages</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">      &gt;&gt;&gt; print(Fractional.e_approximate(e_complete=15))  # output e_curtate</span>
+<span class="sd">      &gt;&gt;&gt; print(Fractional.e_approximate(e_curtate=15))   # output e_complete</span>
+<span class="sd">      &gt;&gt;&gt; x = 45</span>
+<span class="sd">      &gt;&gt;&gt; life = Fractional(udd=False).set_survival(l=lambda x,t: 50-x-t)</span>
+<span class="sd">      &gt;&gt;&gt; print(life.q_r(x, r=0.), life.q_r(x, r=0.5), life.q_r(x, r=1.))</span>
+<span class="sd">      &gt;&gt;&gt; life = Fractional(udd=True).set_survival(l=lambda x,t: 50-x-t)</span>
+<span class="sd">      &gt;&gt;&gt; print(life.q_r(x, r=0.), life.q_r(x, r=0.5), life.q_r(x, r=1.))</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">udd</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>

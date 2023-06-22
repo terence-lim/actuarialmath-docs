@@ -103,6 +103,13 @@
 <span class="sd">    Args:</span>
 <span class="sd">      mu : constant value of force of mortality</span>
 <span class="sd">      udd : assume UDD (True) or CFM (False, default) between integer ages</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">      &gt;&gt;&gt; life = ConstantForce(mu=0.01).set_interest(delta=0.05)</span>
+<span class="sd">      &gt;&gt;&gt; A = life.term_insurance(35, t=35) + life.E_x(35, t=35) * 0.51791 # A_35</span>
+<span class="sd">      &gt;&gt;&gt; A = (life.term_insurance(35, t=35, discrete=False) </span>
+<span class="sd">      &gt;&gt;&gt;      + life.E_x(35, t=35) * 0.51791)    # A_35</span>
+<span class="sd">      &gt;&gt;&gt; P = life.premium_equivalence(A=A, b=100000, discrete=False)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mu</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">udd</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
@@ -286,7 +293,7 @@
     <span class="n">life</span> <span class="o">=</span> <span class="n">ConstantForce</span><span class="p">(</span><span class="n">mu</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span><span class="o">.</span><span class="n">set_interest</span><span class="p">(</span><span class="n">delta</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
     <span class="n">A</span> <span class="o">=</span> <span class="n">life</span><span class="o">.</span><span class="n">term_insurance</span><span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">35</span><span class="p">)</span> <span class="o">+</span> <span class="n">life</span><span class="o">.</span><span class="n">E_x</span><span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">35</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.51791</span> <span class="c1"># A_35</span>
     <span class="n">A</span> <span class="o">=</span> <span class="p">(</span><span class="n">life</span><span class="o">.</span><span class="n">term_insurance</span><span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">35</span><span class="p">,</span> <span class="n">discrete</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> 
-            <span class="o">+</span> <span class="n">life</span><span class="o">.</span><span class="n">E_x</span><span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">35</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.51791</span><span class="p">)</span>    <span class="c1"># A_35</span>
+         <span class="o">+</span> <span class="n">life</span><span class="o">.</span><span class="n">E_x</span><span class="p">(</span><span class="mi">35</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">35</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.51791</span><span class="p">)</span>    <span class="c1"># A_35</span>
     <span class="n">P</span> <span class="o">=</span> <span class="n">life</span><span class="o">.</span><span class="n">premium_equivalence</span><span class="p">(</span><span class="n">A</span><span class="o">=</span><span class="n">A</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span> <span class="n">discrete</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">()</span>

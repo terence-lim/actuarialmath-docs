@@ -97,7 +97,18 @@
 <span class="kn">from</span> <span class="nn">actuarialmath</span> <span class="kn">import</span> <span class="n">Survival</span>
 
 <div class="viewcode-block" id="Lifetime"><a class="viewcode-back" href="../../actuarialmath.lifetime.html#actuarialmath.lifetime.Lifetime">[docs]</a><span class="k">class</span> <span class="nc">Lifetime</span><span class="p">(</span><span class="n">Survival</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes expected moments of future lifetime&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Computes expected moments of future lifetime</span>
+
+<span class="sd">    Examples:</span>
+<span class="sd">      &gt;&gt;&gt; def l(x, s): return 0. if (x+s) &gt;= 100 else 1 - ((x + s)**2) / 10000.</span>
+<span class="sd">      &gt;&gt;&gt; e = Lifetime().set_survival(l=l).e_x(75, t=10, curtate=False)</span>
+<span class="sd">      &gt;&gt;&gt; def fun(omega):  # Solve first for omega, given mu_65 = 1/180</span>
+<span class="sd">      &gt;&gt;&gt;     return Lifetime().set_survival(l=lambda x,s: (1-(x+s)/omega)**0.25,</span>
+<span class="sd">      &gt;&gt;&gt;                                    maxage=omega).mu_x(65)</span>
+<span class="sd">      &gt;&gt;&gt; omega = int(Lifetime.solve(fun, target=1/180, grid=100))  # solve for omega</span>
+<span class="sd">      &gt;&gt;&gt; e = Lifetime().set_survival(l=lambda x,s: (1 - (x+s)/omega)**0.25, </span>
+<span class="sd">      &gt;&gt;&gt;                             maxage=omega).e_x(106)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>

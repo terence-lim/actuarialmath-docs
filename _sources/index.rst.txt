@@ -45,7 +45,7 @@ Quick Start
       
    - Call appropriate methods to compute intermediate or final results, or to `solve` parameter values implicitly.
 
-   - If needed, adjust the answers with `ExtraRisk` or `Mthly` (or its `UDD` or `Woolhouse`) classes.
+   - Adjust answers with `ExtraRisk` or `Mthly` (or its `UDD` or `Woolhouse`) classes.
 
 Examples
 --------
